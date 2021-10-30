@@ -207,6 +207,8 @@ public:
 	int						clip[ MAX_WEAPONS ];
 	int						powerupEndTime[ POWERUP_MAX ];
 	int						weaponMods[ MAX_WEAPONS ];
+	//money variable for tycoon
+	int						money;
 
  	// multiplayer
  	int						ammoPredictTime;

@@ -2602,6 +2602,13 @@ void rvWeapon::Attack( bool altAttack, int num_attacks, float spread, float fuse
 		statManager->WeaponFired( owner, weaponIndex, num_attacks );
 		
 	}
+
+	/*
+	if (weaponIndex == 0)
+	{
+		owner->inventory.money += 3;
+	}
+	*/
 }
 
 /*
@@ -2832,6 +2839,7 @@ void rvWeapon::Hitscan( const idDict& dict, const idVec3& muzzleOrigin, const id
 			}
 		}
 	}
+	
 }
 
 /*

@@ -206,7 +206,7 @@ void idInventory::Clear( void ) {
 	armor				= 0;
 	maxarmor			= 0;
 	secretAreasDiscovered = 0;
-
+	money = 0;
 	memset( ammo, 0, sizeof( ammo ) );
 
 	ClearPowerUps();
@@ -1083,7 +1083,7 @@ idPlayer::idPlayer() {
 
 	doInitWeapon			= false;
 	noclip					= false;
-	godmode					= false;
+	godmode					= true;
 	undying					= g_forceUndying.GetBool() ? !gameLocal.isMultiplayer : false;
 
 	spawnAnglesSet			= false;
@@ -3399,7 +3399,11 @@ void idPlayer::UpdateHudStats( idUserInterface *_hud ) {
 		_hud->SetStateFloat	( "player_healthpct", idMath::ClampFloat ( 0.0f, 1.0f, (float)health / (float)inventory.maxHealth ) );
 		_hud->HandleNamedEvent ( "updateHealth" );
 	}
-		
+		//Money Code
+		_hud->SetStateInt("player_money", inventory.money < 0 ? 0 : inventory.money);
+		_hud->HandleNamedEvent("updateMoney");
+	
+
 	temp = _hud->State().GetInt ( "player_armor", "-1" );
 	if ( temp != inventory.armor ) {
 		_hud->SetStateInt ( "player_armorDelta", temp == -1 ? 0 : (temp - inventory.armor) );
@@ -10321,6 +10325,8 @@ void idPlayer::Damage( idEntity *inflictor, idEntity *attacker, const idVec3 &di
   	lastDamageDir.Normalize();
 	lastDamageDef = damageDef->Index();
 	lastDamageLocation = location;
+
+	
 }
 
 /*
@@ -11183,6 +11189,8 @@ idPlayer::Event_SetHealth
 void idPlayer::Event_SetHealth( float newHealth ) {
 	health = idMath::ClampInt( 1 , inventory.maxHealth, newHealth );
 }
+/*
+
 /*
 =============
 idPlayer::Event_SetArmor
