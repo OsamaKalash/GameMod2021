@@ -459,8 +459,8 @@ void rvStatManager::WeaponHit( const idActor* attacker, const idEntity* victim, 
 			// if attacker was a player, track hit and damage dealt
 			int hitBlock;
 			rvStatHit* statHit = statAllocator.AllocStatHit( gameLocal.time, attacker->entityNumber, victim->entityNumber, weapon, countForAccuracy, &hitBlock );
-
 			statQueue.Append( rvPair<rvStat*, int>( (rvStat*)(statHit), hitBlock ) );
+
 		}
 	}
 }

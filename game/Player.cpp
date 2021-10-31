@@ -11259,6 +11259,50 @@ void idPlayer::SetLastHitTime( int time, bool armorHit ) {
 	if ( lastHitTime != time ) {
 		if ( cursor ) {
 			cursor->HandleNamedEvent( "weaponHit" );
+			//blaster
+			if (currentWeapon == 0) {
+				inventory.money += 3;
+			}
+			//machinegun
+			if (currentWeapon == 1) {
+				inventory.money += 1;
+			}
+			//shotgun
+			if (currentWeapon == 2) {
+				inventory.money += 10;
+			}
+			//hyper blaster
+			if (currentWeapon == 3) {
+				inventory.money += 10;
+			}
+			//grenade launcher
+			if (currentWeapon == 4) {
+				inventory.money += 20;
+			}
+			//nailgun
+			if (currentWeapon == 5) {
+				inventory.money += 30;
+			}
+			//rocket launcher
+			if (currentWeapon == 6) {
+				inventory.money += 40;
+			}
+			//railgun
+			if (currentWeapon == 7) {
+				inventory.money += 50;
+			}
+			//lightning gun
+			if (currentWeapon == 8) {
+				inventory.money += 40;
+			}
+			//dark matter gun
+			if (currentWeapon == 9) {
+				inventory.money += 60;
+			}
+			//napalm gun
+			if (currentWeapon == 10) {
+				inventory.money += 70;
+			}
 		}
 		if ( gameLocal.isMultiplayer ) {			
 			// spectated so we get sounds for a client we're following
