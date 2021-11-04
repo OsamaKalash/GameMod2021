@@ -3752,25 +3752,15 @@ TIME_THIS_SCOPE("idGameLocal::RunFrame - gameDebug.BeginFrame()");
 	}
 
 	//TYPE CODE HERE I GUESS
-	int m = player->inventory.money;
-	
-	idUserInterface* cursor = gameLocal.GetDemoCursor();
-	/*
-	if (cursor) {
-		cursor->HandleNamedEvent("weaponFire");
-		if (m >= 30 && !sgunGiven)
-		{
-			m - 30;
-			GiveStuffToPlayer(player, "weapon_shotgun", "");
-			sgunGiven = true;
-		}
-	}
-	*/
-	
-	
-	
+	int mon = player->inventory.money;
 
-	//gameLocal.SpawnEntityDef(*gameLocal.FindEntityDefDict("monster_berserker"), &ent, false);
+	idThread* thread; 
+	thread = idThread::CurrentThread();
+	thread->WaitSec(10);
+	gameLocal.Printf("waited 10 secs");
+	
+	
+	
 	
 	
 	// show any debug info for this frame
