@@ -1809,7 +1809,7 @@ idAI::TalkTo
 =====================
 */
 void idAI::TalkTo( idActor *actor ) {
-
+	
 	// jshepard: the dead do not speak.
 	if ( aifl.dead )
 		return;
@@ -1832,6 +1832,7 @@ void idAI::TalkTo( idActor *actor ) {
 			aiManager.SetTeamTimer ( team, AITEAMTIMER_ACTION_TALK, 2000 );
 		
 			talkTarget = actor;
+			
 
 			// Move to the next talk message
 			talkMessage = (talkMessage_t)((int)talkMessage + 1);

@@ -2,6 +2,8 @@
 #pragma hdrstop
 
 #include "Game_local.h"
+//#include "GameSys/SysCmds.cpp"
+#include "Player.h"
 
 // RAVEN BEGIN
 #include "../bse/BSEInterface.h"
@@ -30,6 +32,9 @@ idUserInterfaceManager *	uiManager = NULL;
 idDeclManager *				declManager = NULL;
 idAASFileManager *			AASFileManager = NULL;
 idCollisionModelManager *	collisionModelManager = NULL;
+
+
+
 
 // RAVEN BEGIN
 // jscott: game interface to the fx system
@@ -3746,16 +3751,34 @@ TIME_THIS_SCOPE("idGameLocal::RunFrame - gameDebug.BeginFrame()");
 		skipCinematic = false;		
 	}
 
+	//TYPE CODE HERE I GUESS
+	int m = player->inventory.money;
+	
+	idUserInterface* cursor = gameLocal.GetDemoCursor();
+	/*
+	if (cursor) {
+		cursor->HandleNamedEvent("weaponFire");
+		if (m >= 30 && !sgunGiven)
+		{
+			m - 30;
+			GiveStuffToPlayer(player, "weapon_shotgun", "");
+			sgunGiven = true;
+		}
+	}
+	*/
+	
+	
+	
+
+	//gameLocal.SpawnEntityDef(*gameLocal.FindEntityDefDict("monster_berserker"), &ent, false);
+	
+	
 	// show any debug info for this frame
 	RunDebugInfo();
 	D_DrawDebugLines();
 
 	g_simpleItems.ClearModified();
 	return ret;
-
-	//TYPE CODE HERE I GUESS
-	
-
 }
 // RAVEN END
 

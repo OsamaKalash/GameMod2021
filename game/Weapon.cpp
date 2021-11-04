@@ -2603,12 +2603,7 @@ void rvWeapon::Attack( bool altAttack, int num_attacks, float spread, float fuse
 		
 	}
 
-	/*
-	if (weaponIndex == 0)
-	{
-		owner->inventory.money += 3;
-	}
-	*/
+	
 }
 
 /*

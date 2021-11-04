@@ -3,6 +3,8 @@
 #pragma hdrstop
 
 #include "../Game_local.h"
+#include "../Player.h"
+
 
 class rvMonsterSentry : public idAI {
 public:
@@ -42,7 +44,7 @@ protected:
 	virtual void		OnDeath				( void );
 
 	void				Explode				( bool force = false );
-
+	
 private:
 
 	int					nextChatterTime;
@@ -93,6 +95,7 @@ void rvMonsterSentry::Spawn ( void ) {
 
 	kamakaziHealth = spawnArgs.GetInt ( "kamakazi_Health", va("%d", health / 2) );
 	nextChatterTime = 0;
+
 } 
 
 /*
@@ -144,7 +147,8 @@ bool rvMonsterSentry::Pain ( idEntity *inflictor, idEntity *attacker, int damage
 		move.fly_pitch_max = spawnArgs.GetFloat ( "kamakazi_fly_pitch_max" );
 		move.fly_pitch_scale = spawnArgs.GetFloat ( "kamakazi_fly_pitch_scale" );
 	}
-		
+	
+	//owner->inventory.durability--;
 	return idAI::Pain ( inflictor, attacker, damage, dir, location );
 }
 

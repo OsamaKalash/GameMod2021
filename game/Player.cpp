@@ -28,7 +28,17 @@
 #endif
 // RAVEN END
 
-
+//checks if weapon was given to player
+bool mgunGiven = false;
+bool sgunGiven = false;
+bool hblasterGiven = false;
+bool glauncherGiven = false;
+bool nailgunGiven = false;
+bool rlauncherGiven = false;
+bool rgunGiven = false;
+bool lgunGiven = false;
+bool darkmgunGiven = false;
+bool napgunGiven = false;
 
 
 idCVar net_predictionErrorDecay( "net_predictionErrorDecay", "112", CVAR_FLOAT | CVAR_GAME | CVAR_NOCHEAT, "time in milliseconds it takes to fade away prediction errors", 0.0f, 200.0f );
@@ -206,7 +216,10 @@ void idInventory::Clear( void ) {
 	armor				= 0;
 	maxarmor			= 0;
 	secretAreasDiscovered = 0;
+	//mod variables
 	money = 0;
+	durability = 25;
+
 	memset( ammo, 0, sizeof( ammo ) );
 
 	ClearPowerUps();
@@ -3402,6 +3415,10 @@ void idPlayer::UpdateHudStats( idUserInterface *_hud ) {
 		//Money Code
 		_hud->SetStateInt("player_money", inventory.money < 0 ? 0 : inventory.money);
 		_hud->HandleNamedEvent("updateMoney");
+
+		//Durability Code
+		_hud->SetStateInt("player_durability", inventory.durability < 0 ? 0 : inventory.durability);
+		_hud->HandleNamedEvent("updateDurability");
 	
 
 	temp = _hud->State().GetInt ( "player_armor", "-1" );
@@ -6172,6 +6189,7 @@ idPlayer::Weapon_NPC
 */
 void idPlayer::Weapon_NPC( void ) {
 
+	
 	flagCanFire = false;
 
 	if ( idealWeapon != currentWeapon ) {
@@ -6191,10 +6209,90 @@ void idPlayer::Weapon_NPC( void ) {
 		buttonMask |= BUTTON_ATTACK;
 		if ( !talkingNPC ) {
 			idAI *focusAI = static_cast<idAI*>(focusEnt.GetEntity());
+			
+		
 			if ( focusAI ) {
 				focusAI->TalkTo( this );
 				talkingNPC = focusAI;
+				//turns npc name into string for comparison
+				idStr currNpc = focusEnt->name.c_str();
+				//weapons shop npc
+				if ( currNpc == (idStr)"char_marine_npc_anderson_airdefense_1")
+				{
+					
+					//machinegun
+					if (inventory.money >= 20 && !mgunGiven)
+					{
+						inventory.money -= 20;
+						GiveStuffToPlayer(this, "weapon_machinegun", "");
+						mgunGiven = true;
+					}
+					//shotgun
+					else if (inventory.money >= 40 && !sgunGiven)
+					{
+						inventory.money -= 40;
+						GiveStuffToPlayer(this, "weapon_shotgun", "");
+						sgunGiven = true;
+					}
+					//hyperblaster
+					else if (inventory.money >= 60 && !hblasterGiven)
+					{
+						inventory.money -= 60;
+						GiveStuffToPlayer(this, "weapon_hyperblaster", "");
+						hblasterGiven = true;
+					}
+					//grenade launcher
+					else if (inventory.money >= 80 && !glauncherGiven)
+					{
+						inventory.money -= 80;
+						GiveStuffToPlayer(this, "weapon_grenadelauncher", "");
+						glauncherGiven = true;
+					}
+					//nailgun
+					else if (inventory.money >= 100 && !nailgunGiven)
+					{
+						inventory.money -= 100;
+						GiveStuffToPlayer(this, "weapon_nailgun", "");
+						nailgunGiven = true;
+					}
+					//rocket launcher
+					else if (inventory.money >= 120 && !rlauncherGiven)
+					{
+						inventory.money -= 120;
+						GiveStuffToPlayer(this, "weapon_rocketlauncher", "");
+						rlauncherGiven = true;
+					}
+					//railgun
+					else if (inventory.money >= 140 && !rgunGiven)
+					{
+						inventory.money -= 140;
+						GiveStuffToPlayer(this, "weapon_railgun", "");
+						rgunGiven = true;
+					}
+					//lightning gun
+					else if (inventory.money >= 160 && !lgunGiven)
+					{
+						inventory.money -= 160;
+						GiveStuffToPlayer(this, "weapon_lightninggun", "");
+						lgunGiven = true;
+					}
+					//dark matter gun
+					else if (inventory.money >= 180 && !darkmgunGiven)
+					{
+						inventory.money -= 180;
+						GiveStuffToPlayer(this, "weapon_dmg", "");
+						darkmgunGiven = true;
+					}
+					//napalm gun
+					else if (inventory.money >= 200 && !napgunGiven)
+					{
+						inventory.money -= 200;
+						GiveStuffToPlayer(this, "weapon_napalmgun", "");
+						napgunGiven = true;
+					}
+				}
 			}
+
 		}
 	} else if ( currentWeapon == SlotForWeapon ( "weapon_blaster" ) ) {
 		Weapon_Combat();
@@ -11303,6 +11401,8 @@ void idPlayer::SetLastHitTime( int time, bool armorHit ) {
 			if (currentWeapon == 10) {
 				inventory.money += 70;
 			}
+			
+		
 		}
 		if ( gameLocal.isMultiplayer ) {			
 			// spectated so we get sounds for a client we're following
