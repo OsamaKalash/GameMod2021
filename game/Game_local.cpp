@@ -3762,7 +3762,6 @@ TIME_THIS_SCOPE("idGameLocal::RunFrame - gameDebug.BeginFrame()");
 	
 	
 	
-	
 	// show any debug info for this frame
 	RunDebugInfo();
 	D_DrawDebugLines();
