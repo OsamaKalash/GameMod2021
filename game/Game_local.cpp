@@ -48,6 +48,8 @@ idCVar com_forceGenericSIMD( "com_forceGenericSIMD", "0", CVAR_BOOL|CVAR_SYSTEM,
 
 #endif
 
+
+
 idRenderWorld *				gameRenderWorld = NULL;		// all drawing is done to this world
 
 static gameExport_t			gameExport;
@@ -62,6 +64,9 @@ idAnimManager				*animationLib = NULL;
 // the rest of the engine will only reference the "game" variable, while all local aspects stay hidden
 idGameLocal					gameLocal;
 idGame *					game = &gameLocal;	// statically pointed at an idGameLocal
+
+
+
 
 const char *idGameLocal::sufaceTypeNames[ MAX_SURFACE_TYPES ] = {
 	"none",	"metal", "stone", "flesh", "wood", "cardboard", "liquid", "glass", "plastic",
@@ -3746,6 +3751,11 @@ TIME_THIS_SCOPE("idGameLocal::RunFrame - gameDebug.BeginFrame()");
 		skipCinematic = false;		
 	}
 
+	//TYPE CODE HERE I GUESS
+	
+	
+	
+
 	// show any debug info for this frame
 	RunDebugInfo();
 	D_DrawDebugLines();
@@ -3753,9 +3763,7 @@ TIME_THIS_SCOPE("idGameLocal::RunFrame - gameDebug.BeginFrame()");
 	g_simpleItems.ClearModified();
 	return ret;
 
-	//TYPE CODE HERE I GUESS
 	
-
 }
 // RAVEN END
 
