@@ -40,6 +40,17 @@ bool lgunGiven = false;
 bool darkmgunGiven = false;
 bool napgunGiven = false;
 
+//tic count
+int tcount = 0;
+
+//checks if strogg were bought
+bool berserkerBought = false;
+bool gladiatorBought = false;
+bool gruntBought = false;
+bool gunnerBought = false;
+bool tankBought = false;
+bool marineBought = false;
+bool tacticalBought = false;
 
 idCVar net_predictionErrorDecay( "net_predictionErrorDecay", "112", CVAR_FLOAT | CVAR_GAME | CVAR_NOCHEAT, "time in milliseconds it takes to fade away prediction errors", 0.0f, 200.0f );
 idCVar net_showPredictionError( "net_showPredictionError", "-1", CVAR_INTEGER | CVAR_GAME | CVAR_NOCHEAT, "show prediction errors for the given client", -1, MAX_CLIENTS );
@@ -6291,6 +6302,45 @@ void idPlayer::Weapon_NPC( void ) {
 						napgunGiven = true;
 					}
 				}
+
+				if (currNpc == (idStr)"char_marine_npc_bidwell_airdefense_1")
+				{
+					if (inventory.money >= 10 && !berserkerBought)
+					{
+						inventory.money -= 10;
+						berserkerBought = true;
+					}
+					if (inventory.money >= 20 && !gladiatorBought)
+					{
+						inventory.money -= 20;
+						gladiatorBought = true;
+					}
+					if (inventory.money >= 30 && !gruntBought)
+					{
+						inventory.money -= 30;
+						gruntBought = true;
+					}
+					if (inventory.money >= 40 && !gunnerBought)
+					{
+						inventory.money -= 40;
+						gunnerBought = true;
+					}
+					if (inventory.money >= 50 && !tankBought)
+					{
+						inventory.money -= 50;
+						tankBought = true;
+					}
+					if (inventory.money >= 60 && !marineBought)
+					{
+						inventory.money -= 60;
+						marineBought = true;
+					}
+					if (inventory.money >= 70 && !tacticalBought)
+					{
+						inventory.money -= 70;
+						tacticalBought = true;
+					}
+				}
 			}
 
 		}
@@ -9400,6 +9450,44 @@ void idPlayer::Think( void ) {
 				talkingNPC = NULL;
 			}
 		}
+	}
+
+	//gives money per second for strogg bought
+	if (tcount == 60)
+	{
+		if (berserkerBought)
+		{
+			inventory.money += 1;
+		}
+		if (gladiatorBought)
+		{
+			inventory.money += 5;
+		}
+		if (gruntBought)
+		{
+			inventory.money += 10;
+		}
+		if (gunnerBought)
+		{
+			inventory.money += 15;
+		}
+		if (tankBought)
+		{
+			inventory.money += 20;
+		}
+		if (marineBought)
+		{
+			inventory.money += 25;
+		}
+		if (tacticalBought)
+		{
+			inventory.money += 30;
+		}
+		tcount = 0;
+	}
+	else
+	{
+		tcount++;
 	}
 
 	if ( !gameLocal.usercmds ) {

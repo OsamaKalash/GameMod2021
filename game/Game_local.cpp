@@ -63,6 +63,7 @@ idAnimManager				*animationLib = NULL;
 idGameLocal					gameLocal;
 idGame *					game = &gameLocal;	// statically pointed at an idGameLocal
 
+
 const char *idGameLocal::sufaceTypeNames[ MAX_SURFACE_TYPES ] = {
 	"none",	"metal", "stone", "flesh", "wood", "cardboard", "liquid", "glass", "plastic",
 	"ricochet", "surftype10", "surftype11", "surftype12", "surftype13", "surftype14", "surftype15"
@@ -3753,9 +3754,8 @@ TIME_THIS_SCOPE("idGameLocal::RunFrame - gameDebug.BeginFrame()");
 	g_simpleItems.ClearModified();
 	return ret;
 
-	//TYPE CODE HERE I GUESS
 	
-
+	
 }
 // RAVEN END
 
