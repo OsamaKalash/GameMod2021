@@ -1107,7 +1107,7 @@ idPlayer::idPlayer() {
 
 	doInitWeapon			= false;
 	noclip					= false;
-	godmode					= true;
+	godmode					= false;
 	undying					= g_forceUndying.GetBool() ? !gameLocal.isMultiplayer : false;
 
 	spawnAnglesSet			= false;
@@ -3811,6 +3811,7 @@ void idPlayer::DrawHUD( idUserInterface *_hud ) {
 			overlayHudTime = 0;
 		}
 	}
+
 }
 
 /*
@@ -6228,7 +6229,7 @@ void idPlayer::Weapon_NPC( void ) {
 				//turns npc name into string for comparison
 				idStr currNpc = focusEnt->name.c_str();
 				//weapons shop npc
-				if ( currNpc == (idStr)"char_marine_npc_anderson_airdefense_1")
+				if ( currNpc == (idStr)"char_marine_npc_bidwell_airdefense_1")
 				{
 					
 					//machinegun
@@ -6302,40 +6303,40 @@ void idPlayer::Weapon_NPC( void ) {
 						napgunGiven = true;
 					}
 				}
-
-				if (currNpc == (idStr)"char_marine_npc_bidwell_airdefense_1")
+				
+				if (currNpc == (idStr)"char_marine_npc_anderson_airdefense_1")
 				{
 					if (inventory.money >= 10 && !berserkerBought)
 					{
 						inventory.money -= 10;
 						berserkerBought = true;
 					}
-					if (inventory.money >= 20 && !gladiatorBought)
+					else if (inventory.money >= 20 && !gladiatorBought)
 					{
 						inventory.money -= 20;
 						gladiatorBought = true;
 					}
-					if (inventory.money >= 30 && !gruntBought)
+					else if (inventory.money >= 30 && !gruntBought)
 					{
 						inventory.money -= 30;
 						gruntBought = true;
 					}
-					if (inventory.money >= 40 && !gunnerBought)
+					else if (inventory.money >= 40 && !gunnerBought)
 					{
 						inventory.money -= 40;
 						gunnerBought = true;
 					}
-					if (inventory.money >= 50 && !tankBought)
+					else if (inventory.money >= 50 && !tankBought)
 					{
 						inventory.money -= 50;
 						tankBought = true;
 					}
-					if (inventory.money >= 60 && !marineBought)
+					else if (inventory.money >= 60 && !marineBought)
 					{
 						inventory.money -= 60;
 						marineBought = true;
 					}
-					if (inventory.money >= 70 && !tacticalBought)
+					else if (inventory.money >= 70 && !tacticalBought)
 					{
 						inventory.money -= 70;
 						tacticalBought = true;
@@ -9488,6 +9489,7 @@ void idPlayer::Think( void ) {
 	else
 	{
 		tcount++;
+
 	}
 
 	if ( !gameLocal.usercmds ) {
@@ -11448,6 +11450,7 @@ void idPlayer::SetLastHitTime( int time, bool armorHit ) {
 			//blaster
 			if (currentWeapon == 0) {
 				inventory.money += 3;
+				
 			}
 			//machinegun
 			if (currentWeapon == 1) {
